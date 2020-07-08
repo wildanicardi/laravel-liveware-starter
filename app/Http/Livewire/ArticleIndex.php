@@ -14,7 +14,7 @@ class ArticleIndex extends Component
         'articleUpdate' => 'handleUpdate',
     ];
     /**
-     * Render vie article index
+     * Render view article index
      */
     public function render()
     {
@@ -34,12 +34,29 @@ class ArticleIndex extends Component
         $this->emit('getArticle', $article);
     }
     /**
-     * Display message success
+     * Destroy Article.
+     *
+     * @param  \App\Article  $id
+     * @return message
+     */
+    public function destroy($id)
+    {
+        if ($id) {
+            $article = Article::findOrFail($id);
+            $article->delete();
+            session()->flash('message', 'Article id ' . $id . ' was deleted! ');
+        }
+    }
+    /**
+     * Display message store success
      */
     public function handleStored($article)
     {
         session()->flash('message', 'Article ' . $article['title'] . ' was stored! ');
     }
+    /**
+     * Display message update success
+     */
     public function handleUpdate($article)
     {
         session()->flash('message', 'Article ' . $article['title'] . ' was updated! ');

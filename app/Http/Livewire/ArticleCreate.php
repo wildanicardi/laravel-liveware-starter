@@ -10,7 +10,7 @@ class ArticleCreate extends Component
     public $title;
     public $description;
      /**
-     * Render vie article create
+     * Render view article create
      */
     public function render()
     {
