@@ -10,7 +10,8 @@ class ArticleIndex extends Component
     public $articles;
     public $statusUpdate = false;
     protected $listeners = [
-        'articleStored' => 'handleStored'
+        'articleStored' => 'handleStored',
+        'articleUpdate' => 'handleUpdate',
     ];
     /**
      * Render vie article index
@@ -38,5 +39,9 @@ class ArticleIndex extends Component
     public function handleStored($article)
     {
         session()->flash('message', 'Article ' . $article['title'] . ' was stored! ');
+    }
+    public function handleUpdate($article)
+    {
+        session()->flash('message', 'Article ' . $article['title'] . ' was updated! ');
     }
 }
