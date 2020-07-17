@@ -10,6 +10,7 @@ class ArticleIndex extends Component
 {
     use WithPagination;
     public $statusUpdate = false;
+    public $paginate = 5;
     protected $listeners = [
         'articleStored' => 'handleStored',
         'articleUpdate' => 'handleUpdate',
@@ -20,7 +21,7 @@ class ArticleIndex extends Component
     public function render()
     {
         return view('livewire.article-index', [
-            'articles' => Article::latest()->paginate(5)
+            'articles' => Article::latest()->paginate($this->paginate)
         ]);
     }
     /**
