@@ -4,10 +4,11 @@ namespace App\Http\Livewire;
 
 use App\Article;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ArticleIndex extends Component
 {
-    public $articles;
+    use WithPagination;
     public $statusUpdate = false;
     protected $listeners = [
         'articleStored' => 'handleStored',
@@ -18,8 +19,9 @@ class ArticleIndex extends Component
      */
     public function render()
     {
-        $this->articles = Article::latest()->get();
-        return view('livewire.article-index');
+        return view('livewire.article-index', [
+            'articles' => Article::latest()->paginate(5)
+        ]);
     }
     /**
      * Show the form for editing the specified resource.
