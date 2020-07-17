@@ -11,17 +11,24 @@ class ArticleIndex extends Component
     use WithPagination;
     public $statusUpdate = false;
     public $paginate = 5;
+    public $search;
     protected $listeners = [
         'articleStored' => 'handleStored',
         'articleUpdate' => 'handleUpdate',
     ];
+    protected $updatesQueryString = ['search'];
+
+    public function mount()
+    {
+        $this->search = request()->query('search', $this->search);
+    }
     /**
      * Render view article index
      */
     public function render()
     {
         return view('livewire.article-index', [
-            'articles' => Article::latest()->paginate($this->paginate)
+            'articles' => $this->search === null ? Article::latest()->paginate($this->paginate) : Article::where('title', 'like', '%' . $this->search . '%')->paginate($this->paginate)
         ]);
     }
     /**

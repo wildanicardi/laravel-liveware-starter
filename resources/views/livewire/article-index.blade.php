@@ -19,6 +19,9 @@
                 <option value="15">15</option>
             </select>
         </div>
+        <div class="col">
+            <input type="text" class="form-control form-control-sm" placeholder="Seacrh" wire:model="search">
+        </div>
     </div>
     <hr>
     <table class="table">
